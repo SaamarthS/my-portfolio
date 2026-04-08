@@ -112,26 +112,10 @@ export default function Contact() {
               ))}
             </div>
 
-            {/*
-              RESUME BUTTON — currently disabled.
-              TO ENABLE: place your PDF at /public/resume.pdf and replace the <span> below with:
-              <a href="/resume.pdf" download className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Download size={15} /> Download Resume
-              </a>
-            */}
-            <span
-              id="resume-download-btn"
-              className="btn-disabled"
-              title="Resume coming soon!"
-              aria-disabled="true"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-            >
-              <Download size={15} />
-              Download Resume
-              <span style={{ fontSize: '0.7rem', background: 'rgba(0,76,228,0.1)', color: 'var(--blue)', padding: '0.1rem 0.45rem', borderRadius: '4px' }}>
-                coming soon
-              </span>
-            </span>
+
+            <a href="/resume.pdf" download className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Download size={15} /> Download Resume
+            </a>
           </div>
         </FadeIn>
 
