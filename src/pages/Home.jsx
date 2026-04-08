@@ -81,7 +81,7 @@ export default function Home() {
                 marginBottom: '1rem',
               }}
             >
-              hi, my name is
+              Hey! This is
             </p>
           </FadeIn>
 
@@ -253,6 +253,7 @@ export default function Home() {
           <AboutRow
             delay={0.05}
             photoFirst
+            imgSrc="/photos/photo2.jpg"
             text={
               <>
                 I&apos;m a Computer Science student at{' '}
@@ -272,6 +273,7 @@ export default function Home() {
           <AboutRow
             delay={0.08}
             photoFirst={false}
+            imgSrc="/photos/photo1.jpg"
             text={
               <>
                 Outside of tech, I&apos;m passionate about music — I sing and play
@@ -290,18 +292,11 @@ export default function Home() {
 }
 
 /* ── About alternating row ── */
-function AboutRow({ text, photoFirst, delay = 0 }) {
+function AboutRow({ text, photoFirst, imgSrc, delay = 0 }) {
   const photoBlock = (
     <FadeIn delay={delay} style={{ flex: 1, minWidth: '240px', maxWidth: '380px' }}>
-      {/* Replace this placeholder with your actual image */}
-      {/* To use a real photo: replace the div below with:
-          <img src="/photos/your-photo.jpg" alt="Saamarth S"
-            style={{ width: '100%', borderRadius: '12px', objectFit: 'cover', aspectRatio: '4/5' }} />
-      */}
-      <div className="photo-placeholder">
-        <ImageIcon size={28} style={{ opacity: 0.35 }} />
-        <span>[ Add Photo Here ]</span>
-      </div>
+      <img src={imgSrc} alt="Saamarth S"
+        style={{ width: '100%', borderRadius: '12px', objectFit: 'cover', aspectRatio: '4/5' }} />
     </FadeIn>
   );
 

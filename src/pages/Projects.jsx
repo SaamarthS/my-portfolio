@@ -31,6 +31,7 @@ const PROJECTS = [
       "A full-stack web app with a clean, modern UI that addresses real urban infrastructure problems in Bengaluru. Owners can list unused parking spaces; drivers can search, book, and pay — all in one place. Built with a focus on UX simplicity and real-world impact.",
     tech: ['Vite', 'TypeScript', 'React', 'shadcn-ui', 'Tailwind CSS'],
     github: 'https://github.com/SaamarthS/FindMyParking',
+    demo: 'https://findmyparking.lovable.app/',
   },
   {
     id: 'cookmate-ai',
@@ -160,14 +161,27 @@ function ProjectCard({ project }) {
                   <GithubIcon size={15} />
                   View on GitHub
                 </a>
-                {/* Live demo — disabled until URL is available */}
-                <span className="btn-disabled" title="Live demo coming soon" aria-disabled="true">
-                  <ExternalLink size={15} />
-                  Live Demo
-                  <span style={{ fontSize: '0.7rem', background: 'rgba(0,76,228,0.08)', color: 'var(--blue)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
-                    soon
+                {/* Live demo */}
+                {project.demo ? (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                  >
+                    <ExternalLink size={15} />
+                    Live Demo
+                  </a>
+                ) : (
+                  <span className="btn-disabled" title="Live demo coming soon" aria-disabled="true">
+                    <ExternalLink size={15} />
+                    Live Demo
+                    <span style={{ fontSize: '0.7rem', background: 'rgba(0,76,228,0.08)', color: 'var(--blue)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
+                      soon
+                    </span>
                   </span>
-                </span>
+                )}
               </div>
             </div>
           </motion.div>
