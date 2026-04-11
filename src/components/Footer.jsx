@@ -4,7 +4,14 @@
  */
 import { motion } from 'framer-motion';
 
-const MARQUEE_TEXT = 'eat • sleep • build • eat • sleep • build • eat • sleep • build • eat • sleep • build • ';
+const MARQUEE_OPTIONS = [
+  'code • compile • debug • repeat • ',
+  'train • tune • deploy • repeat • ',
+];
+
+const raw = MARQUEE_OPTIONS[Math.floor(Math.random() * MARQUEE_OPTIONS.length)];
+// Repeat enough times so the seamless loop never shows a gap
+const MARQUEE_TEXT = raw.repeat(6);
 
 export default function Footer() {
   return (
@@ -28,10 +35,8 @@ export default function Footer() {
             gap: 0,
           }}
         >
-          <span style={{ paddingRight: '2rem' }}>{MARQUEE_TEXT}</span>
-          <span style={{ paddingRight: '2rem' }}>{MARQUEE_TEXT}</span>
-          <span style={{ paddingRight: '2rem' }}>{MARQUEE_TEXT}</span>
-          <span style={{ paddingRight: '2rem' }}>{MARQUEE_TEXT}</span>
+          <span>{MARQUEE_TEXT}</span>
+          <span>{MARQUEE_TEXT}</span>
         </motion.div>
       </div>
     </footer>
