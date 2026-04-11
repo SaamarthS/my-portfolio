@@ -27,6 +27,12 @@ const SOCIALS = [
 /* ── Experience data ── */
 const EXPERIENCE = [
   {
+    role: 'Software and AI Development Intern',
+    org: 'Central Silk Board, Govt. of India',
+    duration: 'Dec 2025 – Present',
+    desc: 'Built a Flask dashboard for live camera feeds, grading results, and report printing. Also fine-tuned a YOLOv8 model for silk defect detection.',
+  },
+  {
     role: 'Student Trainee',
     org: 'eYantra, IIT Bombay',
     duration: 'Aug 2021 – Jan 2022',
@@ -35,13 +41,13 @@ const EXPERIENCE = [
   {
     role: 'Member',
     org: 'Google Developer Group RVCE',
-    duration: null,
+    duration: 'Nov 2025 - Present',
     desc: null,
   },
   {
     role: 'Junior Associate',
     org: 'Entrepreneurship Cell RVCE',
-    duration: null,
+    duration: 'Nov 2025 - Present',
     desc: null,
   },
 ];
@@ -52,11 +58,11 @@ export default function Home() {
       {/* ──────────────── HERO ──────────────── */}
       <section
         style={{
-          minHeight: 'calc(78vh - 64px)',
+          minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '3rem 2rem 2.5rem',
+          padding: '0 2rem',
         }}
       >
         <div
@@ -65,20 +71,20 @@ export default function Home() {
             flexDirection: 'column',
             alignItems: 'center',
             textAlign: 'center',
-            maxWidth: '640px',
+            maxWidth: '900px',
             width: '100%',
             gap: 0,
           }}
         >
-          {/* "hi, my name is" */}
+          {/* "Hey! This is" */}
           <FadeIn delay={0}>
             <p
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.9rem',
+                fontSize: '1.3rem',
                 color: 'var(--blue)',
                 letterSpacing: '0.04em',
-                marginBottom: '1rem',
+                marginBottom: '4px',
               }}
             >
               Hey! This is
@@ -90,12 +96,12 @@ export default function Home() {
             <h1
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(3.5rem, 10vw, 6.5rem)',
+                fontSize: 'clamp(5rem, 12vw, 7.5rem)',
                 fontWeight: '700',
                 color: 'var(--blue)',
                 lineHeight: 1.0,
                 letterSpacing: '-0.02em',
-                marginBottom: '1.75rem',
+                marginBottom: '16px',
               }}
             >
               Saamarth S
@@ -107,9 +113,9 @@ export default function Home() {
             <div
               style={{
                 display: 'flex',
-                gap: '0.65rem',
+                gap: '0.85rem',
                 justifyContent: 'center',
-                marginBottom: '2rem',
+                marginBottom: '20px',
               }}
             >
               {SOCIALS.map(({ id, href, label, Icon }) => (
@@ -124,34 +130,91 @@ export default function Home() {
                   whileHover={{ y: -3 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <Icon size={17} />
+                  <Icon size={22} />
                 </motion.a>
               ))}
             </div>
           </FadeIn>
 
-          {/* Vaanya-style bordered role card */}
-          <FadeIn delay={0.26}>
+          {/* "I am a" label */}
+          <FadeIn delay={0.24}>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '1rem',
+              color: 'var(--blue)',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              fontWeight: '500',
+              marginBottom: '10px',
+            }}>
+              I am a
+            </p>
+          </FadeIn>
+
+          {/* Single squarish box with both role labels */}
+          <FadeIn delay={0.3}>
             <div
               style={{
-                border: '1.5px solid var(--blue)',
-                borderRadius: '999px',
-                padding: '0.85rem 2.6rem',
-                marginBottom: '2.5rem',
-                display: 'inline-block',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '28px',
               }}
             >
-              <span
+              <div
                 style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontStyle: 'italic',
-                  fontSize: '1.15rem',
-                  color: 'var(--blue)',
-                  letterSpacing: '0.015em',
+                  border: '1.5px solid var(--blue)',
+                  borderRadius: '18px',
+                  padding: '1rem 3.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '0.15rem',
+                  width: 'clamp(280px, 50vw, 520px)',
                 }}
               >
-                Computer Science Engineer
-              </span>
+                <span style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontStyle: 'italic',
+                  fontSize: '1.08rem',
+                  color: 'var(--blue)',
+                  letterSpacing: '0.015em',
+                  whiteSpace: 'nowrap',
+                }}>
+                  Computer Science Engineer
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.9rem',
+                  color: 'var(--blue)',
+                  opacity: 0.45,
+                  lineHeight: 1,
+                  margin: '0.05rem 0',
+                }}>
+                  +
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontStyle: 'italic',
+                  fontSize: '1.08rem',
+                  color: 'var(--blue)',
+                  letterSpacing: '0.015em',
+                  whiteSpace: 'nowrap',
+                }}>
+                  Data Science &amp; Applications
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.72rem',
+                  fontStyle: 'italic',
+                  color: 'var(--blue)',
+                  opacity: 0.5,
+                  marginTop: '0.35rem',
+                  letterSpacing: '0.02em',
+                }}>
+                  (in progress)
+                </span>
+              </div>
             </div>
           </FadeIn>
 
@@ -231,7 +294,7 @@ export default function Home() {
           borderTop: '1px solid var(--border)',
         }}
       >
-        <div className="site-container">
+        <div className="site-container" style={{ maxWidth: '960px', margin: '0 auto' }}>
           {/* Section label */}
           <FadeIn>
             <p
@@ -243,6 +306,7 @@ export default function Home() {
                 textTransform: 'uppercase',
                 color: 'var(--blue)',
                 marginBottom: '4rem',
+                textAlign: 'center',
               }}
             >
               about me

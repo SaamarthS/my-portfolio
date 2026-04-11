@@ -1,6 +1,7 @@
 /**
- * Projects Page — Expandable accordion project cards
- * Each card shows: name, brief, tech stack tags, expandable description + GitHub link
+ * Projects Page — Vaanya-style layout
+ * Each card: name, brief description, tech tags always visible.
+ * Chevron expands full description + GitHub/Demo links.
  */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -44,29 +45,55 @@ const PROJECTS = [
     tech: ['AI/ML', 'LLMs', 'Python'],
     github: 'https://github.com/SaamarthS/Cookmate-Ai',
   },
+  {
+    id: 'silk-quality',
+    name: 'Silk Quality Automation System',
+    year: 'ongoing',
+    brief: 'An autonomous computer vision grading system for the Central Silk Board (Govt. of India) — replacing manual silk panel inspection at CSB facilities.',
+    badge: 'Industry Collaboration · CSB, Govt. of India',
+    description:
+      'A senior-led team project I joined in December 2024, collaborating with the Central Silk Board under the Government of India. The system uses a Jetson Nano + camera setup on a conveyor line to capture silk panels, then runs YOLOv8 to detect surface defects. Evenness is evaluated via a brightness deviation formula that tracks luminosity across the panel and flags sudden dips. The final output is an overall quality grade covering cleanness, neatness, and evenness.\n\nMy contributions: (1) Built the Flask dashboard used by CSB employees to view live camera feeds, grading results, historical data, and print quality report sheets. (2) Currently fine-tuning the YOLOv8 model for improved defect detection accuracy on silk panels.',
+    tech: ['Python', 'Flask', 'YOLOv8', 'OpenCV'],
+    github: null,
+    demo: null,
+    teamProject: true,
+  },
 ];
 
 export default function Projects() {
   return (
     <Layout>
       <div className="section site-container">
-        {/* Page header */}
+        {/* Page header — centred */}
         <FadeIn>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--blue)', marginBottom: '0.75rem' }}>
-            selected work
-          </p>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-            projects
-          </h1>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'var(--text-secondary)', marginBottom: '3.5rem', maxWidth: '520px', lineHeight: 1.7 }}>
-            Things I&apos;ve built, competed with, and tinkered on — ranging from competition games to real-world apps.
-          </p>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <h1 style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(2.5rem, 7vw, 4.5rem)',
+              fontWeight: '700',
+              color: 'var(--blue)',
+              lineHeight: 1.0,
+              letterSpacing: '-0.02em',
+              marginBottom: '0.75rem',
+            }}>
+              projects
+            </h1>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '1rem',
+              color: 'var(--blue)',
+              opacity: 0.55,
+              lineHeight: 1.7,
+            }}>
+              Things I&apos;ve built, competed, and tinkered on.
+            </p>
+          </div>
         </FadeIn>
 
         {/* Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           {PROJECTS.map((project, i) => (
-            <FadeIn key={project.id} delay={i * 0.08}>
+            <FadeIn key={project.id} delay={0.06 + i * 0.07}>
               <ProjectCard project={project} />
             </FadeIn>
           ))}
@@ -76,55 +103,81 @@ export default function Projects() {
   );
 }
 
-/* ── Project accordion card ── */
+/* ── Project card: full clickable header, always-visible name+brief+tags ── */
 function ProjectCard({ project }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="card" style={{ overflow: 'hidden' }}>
-      {/* Header button */}
+    <div
+      className="card"
+      style={{ overflow: 'hidden', background: 'transparent' }}
+    >
+      {/* Entire top section is the clickable toggle */}
       <button
         onClick={() => setOpen(prev => !prev)}
         aria-expanded={open}
         id={`project-toggle-${project.id}`}
         style={{
-          width: '100%', display: 'flex', alignItems: 'flex-start',
-          justifyContent: 'space-between', padding: '1.2rem 1.4rem',
-          background: 'transparent', border: 'none', cursor: 'pointer',
-          textAlign: 'left', gap: '1rem',
+          width: '100%',
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          textAlign: 'left',
+          padding: '1.75rem 2rem 1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0',
         }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(44,95,138,0.025)'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
       >
-        {/* Left content */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', flex: 1 }}>
-          {/* Name + year + badge */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+        {/* Name + year + badge + chevron row */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '0.6rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
+            <span style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: '1.35rem',
+              fontWeight: '400',
+              color: 'var(--blue)',
+              lineHeight: 1.2,
+            }}>
               {project.name}
             </span>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-              {project.year}
-            </span>
             {project.badge && (
-              <span className="tag" style={{ fontSize: '0.7rem' }}>{project.badge}</span>
+              <span className="tag" style={{ fontSize: '0.72rem' }}>{project.badge}</span>
             )}
           </div>
-          {/* Brief */}
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '400', lineHeight: 1.5 }}>
-            {project.brief}
-          </span>
+          {/* Chevron */}
+          <motion.span
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            style={{ color: 'var(--blue)', flexShrink: 0, display: 'flex', marginTop: '4px' }}
+          >
+            <ChevronDown size={20} />
+          </motion.span>
         </div>
 
-        {/* Chevron */}
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          style={{ color: 'var(--blue)', flexShrink: 0, display: 'flex', marginTop: '4px' }}
-        >
-          <ChevronDown size={17} />
-        </motion.span>
+        {/* Brief — always visible */}
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '0.92rem',
+          color: 'var(--blue)',
+          opacity: 0.7,
+          lineHeight: 1.65,
+          marginBottom: '1rem',
+        }}>
+          {project.brief}
+        </p>
+
+        {/* Tech tags — always visible */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+          {project.tech.map(t => (
+            <span key={t} className="tag">{t}</span>
+          ))}
+        </div>
       </button>
 
-      {/* Expandable body */}
+      {/* Expandable full description + links */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -132,37 +185,41 @@ function ProjectCard({ project }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: 'easeInOut' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <div style={{ padding: '0 1.4rem 1.4rem', borderTop: '1px solid var(--border)' }}>
-              {/* Description */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginTop: '1rem', marginBottom: '1.2rem' }}>
-                {project.description}
-              </p>
-
-              {/* Tech tags */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
-                {project.tech.map(t => (
-                  <span key={t} className="tag">{t}</span>
-                ))}
-              </div>
+            <div style={{ padding: '0 2rem 2rem', borderTop: '1px solid rgba(44,95,138,0.18)' }}>
+              {/* Full description */}
+              {project.description.split('\n\n').map((para, i) => (
+                <p key={i} style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.91rem',
+                  color: 'var(--blue)',
+                  opacity: 0.75,
+                  lineHeight: 1.8,
+                  marginTop: '1.1rem',
+                  marginBottom: i < project.description.split('\n\n').length - 1 ? '0.75rem' : '1.25rem',
+                }}>
+                  {para}
+                </p>
+              ))}
 
               {/* Buttons */}
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id={`github-link-${project.id}`}
-                  className="btn-outline"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-                >
-                  <GithubIcon size={15} />
-                  View on GitHub
-                </a>
-                {/* Live demo */}
-                {project.demo ? (
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`github-link-${project.id}`}
+                    className="btn-outline"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                  >
+                    <GithubIcon size={15} />
+                    View on GitHub
+                  </a>
+                )}
+                {project.github && (project.demo ? (
                   <a
                     href={project.demo}
                     target="_blank"
@@ -177,9 +234,21 @@ function ProjectCard({ project }) {
                   <span className="btn-disabled" title="Live demo coming soon" aria-disabled="true">
                     <ExternalLink size={15} />
                     Live Demo
-                    <span style={{ fontSize: '0.7rem', background: 'rgba(0,76,228,0.08)', color: 'var(--blue)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
+                    <span style={{ fontSize: '0.7rem', background: 'rgba(44,95,138,0.08)', color: 'var(--blue)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
                       soon
                     </span>
+                  </span>
+                ))}
+                {project.teamProject && (
+                  <span style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.78rem',
+                    color: 'var(--blue)',
+                    opacity: 0.6,
+                    fontStyle: 'italic',
+                    alignSelf: 'center',
+                  }}>
+                    Private / Industry collaboration — no public repo
                   </span>
                 )}
               </div>
