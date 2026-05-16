@@ -12,20 +12,36 @@ import FadeIn from '../components/FadeIn';
 
 const PROJECTS = [
   {
-    id: 'robo-rescue',
-    name: 'Robo Rescue',
-    year: '2021',
-    brief: "A Python-based game built for the eYantra School Robotics Competition finale at IIT Bombay.",
-    badge: 'Top 8 in India · Best Narrative Award',
+    id: 'silk-quality',
+    name: 'Central Silk Board — AI Quality Grading System',
+    year: 'Dec 2024 – Present',
+    brief: 'Automated silk quality inspection system deployed on a conveyor line at CSB facilities — uses YOLOv8 defect detection and a custom brightness deviation algorithm to produce composite quality grades.',
+    badge: 'Industry Collaboration · CSB, Govt. of India',
     description:
-      "A story-driven game where a student at IIT Bombay's eYantra lab must navigate the campus and repair their robot eYan. Built entirely in Python as part of the eYSRC competition — won Top 8 placement in India and the Best Narrative Award out of thousands of teams.",
-    tech: ['Python'],
-    github: 'https://github.com/SaamarthS/eYantra-IITB_FinalGame',
+      'Collaborating with the Central Silk Board, Government of India, on an automated silk quality inspection system deployed on a conveyor line. The system uses a Jetson Nano and camera setup to capture silk panels in real time, running YOLOv8 for surface defect detection and a custom brightness deviation algorithm to evaluate thread evenness across the panel. Final output is a composite quality grade covering cleanness, neatness, and evenness.\n\nMy contributions: (1) Built the Flask-based internal dashboard used by CSB employees to view grading results, inspect historical panel data, and generate printable quality report sheets. (2) Currently fine-tuning the YOLOv8 model to improve defect detection accuracy on silk panel imagery.',
+    tech: ['Python', 'Flask', 'YOLOv8', 'OpenCV', 'Jetson Nano'],
+    github: null,
+    demo: null,
+    teamProject: true,
+  },
+  {
+    id: 'grindguard',
+    name: 'GrindGuard — Answer to Unlock',
+    year: '2025',
+    brief: 'A productivity web app that gamifies studying — students prove their learning through quizzes before unlocking rewards like break time or social media access.',
+    badge: 'Samsung Hackathon',
+    description:
+      "Students shouldn't earn breaks for just spending time — they should earn them by proving they learned something. GrindGuard is a quiz-gated productivity platform where you set up a study session, take a short quiz when you're done, and only unlock your reward (break time, social media, etc.) if you pass.\n\nBuilt as part of a team of 4+ for the Samsung Hackathon. Features a login system, a dashboard with four core sections (Start Session, Quiz, Rewards, Progress), quiz-based learning verification, and a profile editor. The full workflow: Start Session → Quiz → Reward → Progress.",
+    tech: ['React', 'Vite', 'JavaScript', 'CSS', 'OpenClaw'],
+    github: 'https://github.com/samarthprabhu2007-art/SAMSUNG-HACKATHON-',
+    demo: 'https://samsung-hackathon-bice.vercel.app/',
+    demoVideo: 'https://drive.google.com/file/d/1YwucDdUoMkjgEECS_AgHrgoVXK5ZeSt-/view?usp=sharing',
+    teamProject: false,
   },
   {
     id: 'findmyparking',
     name: 'FindMyParking',
-    year: '2025',
+    year: 'Jan 2026',
     brief: "An Airbnb-style platform to solve Bengaluru's parking crisis by connecting drivers to available private parking spots.",
     badge: null,
     description:
@@ -37,26 +53,24 @@ const PROJECTS = [
   {
     id: 'cookmate-ai',
     name: 'Cookmate AI',
-    year: 'ongoing',
+    year: 'Dec 2025',
     brief: 'A smart AI cooking assistant that generates recipes based on ingredients you have at home.',
     badge: null,
     description:
       "An intelligent cooking bot that tracks your groceries, monitors health and nutrition, generates personalised recipes based on what's in your kitchen, and reminds you to reorder when supplies run low. Combines LLMs with practical utility for everyday use.",
-    tech: ['AI/ML', 'LLMs', 'Python'],
+    tech: ['JavaScript', 'HTML', 'CSS'],
     github: 'https://github.com/SaamarthS/Cookmate-Ai',
   },
   {
-    id: 'silk-quality',
-    name: 'Silk Quality Automation System',
-    year: 'ongoing',
-    brief: 'An autonomous computer vision grading system for the Central Silk Board (Govt. of India) — replacing manual silk panel inspection at CSB facilities.',
-    badge: 'Industry Collaboration · CSB, Govt. of India',
+    id: 'robo-rescue',
+    name: 'Robo Rescue',
+    year: 'Jan 2022',
+    brief: "A Python-based game built for the eYantra School Robotics Competition finale at IIT Bombay.",
+    badge: 'Top 8 in India · Best Narrative Award',
     description:
-      'A senior-led team project I joined in December 2024, collaborating with the Central Silk Board under the Government of India. The system uses a Jetson Nano + camera setup on a conveyor line to capture silk panels, then runs YOLOv8 to detect surface defects. Evenness is evaluated via a brightness deviation formula that tracks luminosity across the panel and flags sudden dips. The final output is an overall quality grade covering cleanness, neatness, and evenness.\n\nMy contributions: (1) Built the Flask dashboard used by CSB employees to view live camera feeds, grading results, historical data, and print quality report sheets. (2) Currently fine-tuning the YOLOv8 model for improved defect detection accuracy on silk panels.',
-    tech: ['Python', 'Flask', 'YOLOv8', 'OpenCV'],
-    github: null,
-    demo: null,
-    teamProject: true,
+      "A story-driven game where a student at IIT Bombay's eYantra lab must navigate the campus and repair their robot eYan. Built entirely in Python as part of the eYSRC competition — won Top 8 placement in India and the Best Narrative Award out of thousands of teams.",
+    tech: ['Python'],
+    github: 'https://github.com/SaamarthS/eYantra-IITB_FinalGame',
   },
 ];
 
@@ -239,6 +253,19 @@ function ProjectCard({ project }) {
                     </span>
                   </span>
                 ))}
+                {project.demoVideo && (
+                  <a
+                    href={project.demoVideo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`demo-video-${project.id}`}
+                    className="btn-outline"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                  >
+                    <ExternalLink size={15} />
+                    Watch Demo
+                  </a>
+                )}
                 {project.teamProject && (
                   <span style={{
                     fontFamily: 'var(--font-body)',
